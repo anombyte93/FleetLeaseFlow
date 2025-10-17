@@ -1,0 +1,76 @@
+roject Title: Leasing & Fleet Management Dashboard Web App
+Purpose / Users:
+
+Primary users: clients who lease vehicles / equipment, and internal fleet managers / administrators.
+
+They should be able to see summary views, drill down into detail (vehicle, lease contract, maintenance), and clients can update maintenance records.
+
+High-Level Requirements / Features:
+
+Landing Dashboard / Summary Page (Client & Fleet Overview)
+  • At top: summary cards (e.g. total assets, number due for registration renewal within 30/60/90 days, number overdue maintenance, upcoming contract expiries).
+  • Charts / graphs: e.g. cost trends (maintenance cost over time), contract expiry timeline, distribution by vehicle type / status.
+  • Alerts / notifications panel: e.g. “3 vehicles need insurance renewal next month”, “5 overdue maintenance tasks”
+  • Quick links or search box to jump to specific vehicle or contract.
+
+Vehicle / Equipment Detail View
+For a selected asset (by registration / identifier):
+  • Metadata: registration number, make/model, VIN or identifier, date purchased / lease start, odometer (or hour meter), tyre info.
+  • Renewal dates: registration expiry, insurance expiry, other compliance checks.
+  • Maintenance items: list of upcoming/overdue service tasks (oil, filters, inspection) with last done dates, status.
+  • Insurance / lease contract link or summary.
+  • History / log: maintenance records, repair costs, parts used.
+
+Lease Contract / Agreement View
+  • Contract details: contract number, start date, end date, monthly payment, residual value (if applicable), lessee client info.
+  • Status (active, expired, in grace, terminated)
+  • Linked assets (which vehicles/equipment are under this contract)
+  • Payment schedule, any pending payments or changes
+
+Maintenance Records / Edit / Create by Client
+  • Clients (with correct permission) can add new maintenance entries for their assets: date, type of work, description, cost, parts, next due interval.
+  • Clients can upload attachments (photos, invoices)
+  • Validation: only for assets they own / lease
+  • Show audit trail (who added, when)
+
+Authentication & Authorization
+  • Login system (username / email + password)
+  • Role-based permissions:
+   – Client / lessee role: access assets under their contract, ability to add maintenance for those.
+   – Admin / Fleet manager: global view, ability to edit all records, manage clients, set up vehicles / contracts
+
+Responsive UI
+  • The UI must scale well to desktop, tablet, mobile.
+  • Use component-based layout, mobile-first design, collapsible side nav etc.
+
+Performance / UX Considerations
+  • Lazy-load data / pagination for large lists
+  • Use charts / visualizations that are lightweight
+  • Minimize blocking synchronous calls; use asynchronous interactions / loading spinners
+
+Design Guidance / Inspirations
+  • Use clean, professional styling like high-end leasing / fleet websites (look at Webflow leasing site examples). 
+Webflow
+
+  • Use whitespace, consistent typography, strong but restrained color accents for CTAs / alerts
+  • Use a dashboard template (e.g. fleet UI template) as foundation. 
+akveo.com
+
+  • Navigation: side menu or top menu with clear labels (“Dashboard”, “Vehicles”, “Contracts”, “Maintenance”, “Reports”)
+  • CTAs (buttons) should be distinct (color contrast, size) and consistent.
+
+Data Model / Backend
+  • Entities: Client, Vehicle / Equipment, LeaseContract, MaintenanceRecord, InsuranceRecord, TyreRecord, Alerts / Notifications
+  • Relations: Client ↔ LeaseContract; LeaseContract ↔ Vehicle; Vehicle ↔ MaintenanceRecord (many)
+  • The backend should expose CRUD APIs for all these entities, with authorization checks
+  • Should support filtering, sorting, paginated APIs
+
+Tech Stack Recommendations (you may choose)
+  • Frontend: React (or Vue / Svelte) + a charting library (e.g. Recharts, Chart.js, D3)
+  • Styling: Tailwind CSS, or component library (Ant Design, Material UI)
+  • Backend: Node.js + Express / Fastify or Python (Flask / FastAPI)
+  • Database: PostgreSQL or MySQL (or SQLite initially)
+  • If you want real-time (alerts push), WebSockets / SSE
+
+Prompt Task (for Replit / generator):
+“Generate a full-stack web app scaffold fulfilling the above spec: backend, frontend, data models, routing, UI components, with placeholder data. Provide folder structure, sample seed data, and instructions to run locally. Use modular, maintainable code. Prioritize clear UI and responsive design. The UI design should mimic a leasing/fleet company style (dashboard, clean lines, professional color palette). Also generate sample JSON fixtures and show how a client would add a maintenance record. Ensure role-based access is included. Add comments and simple error handling in all endpoints (e.g. logging, validation).”
